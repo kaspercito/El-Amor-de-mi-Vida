@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Ey, Belén (mi ratoncito pequeño)! ¿Lista para un poco de caos romántico ecuatoriano-argentino? 😏</title>
+    <title>¿Soy el amor de tu vida, Belén? 💜</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            background: linear-gradient(135deg, #8e44ad 0%, #ffffff 50%, #ffffff 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,91 +15,177 @@
             margin: 0;
             color: #333;
             text-align: center;
+            overflow: hidden; /* Para el confeti */
         }
         .container {
             max-width: 500px;
-            padding: 20px;
+            padding: 30px;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.2);
+            transition: all 0.5s ease;
         }
         h1 {
-            color: #e74c3c;
-            margin-bottom: 10px;
+            color: #8e44ad;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
-        p {
+        .pregunta {
             font-size: 18px;
             margin-bottom: 30px;
             line-height: 1.4;
+            color: #555;
+        }
+        .botones {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         button {
-            background: #e74c3c;
-            color: white;
-            border: none;
             padding: 15px 30px;
-            font-size: 20px;
+            font-size: 18px;
+            border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.2);
         }
-        button:hover {
+        .btn-si {
+            background: #8e44ad;
+            color: white;
+        }
+        .btn-si:hover {
+            transform: scale(1.05);
+            background: #7d3c98;
+        }
+        .btn-no {
+            background: #bdc3c7;
+            color: #333;
+            font-weight: bold;
+        }
+        .btn-no:hover {
+            transform: scale(1.05);
+            background: #95a5a6;
+        }
+        .mensaje-final {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #8e44ad;
+            animation: fadeIn 1s ease;
+        }
+        .btn-confeti {
+            background: #e74c3c;
+            color: white;
+            margin-top: 20px;
+            display: none;
+        }
+        .btn-confeti:hover {
             transform: scale(1.05);
             background: #c0392b;
         }
-        #mensaje {
-            margin-top: 20px;
-            font-size: 16px;
-            font-style: italic;
-            color: #7f8c8d;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .corazon {
-            animation: latido 1s infinite;
-            color: #e74c3c;
-        }
         .banderas {
-            font-size: 24px;
-            margin: 0 10px;
+            font-size: 20px;
+            margin: 0 5px;
         }
-        @keyframes latido {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Confeti */
+        .confeti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #8e44ad;
+            pointer-events: none;
+            animation: confeti-fall linear infinite;
+        }
+        @keyframes confeti-fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>¡Hola, Belén, mi ratoncito pequeño! <span class="banderas">🇪🇨❤️🇦🇷</span> 💕</h1>
-        <p>Sé que no estás lista para nadie... pero ¿y si este botón mágico te hace reír un rato? Soy yo, tu ecuatoriano terco, desde acá mandándote amor con un toque de mate (bueno, café, pero lo intento). Dale clic y ve si te derrite el corazón. Si no, ignórame... pero no lo harás. 😜</p>
-        <button onclick="molestar()">¡Moléstame un poquito más, ratoncito!</button>
-        <div id="mensaje">¡Haz clic para empezar la diversión binacional!</div>
+        <h1>¡Hola, Belén, mi ratoncito pequeño!<span class="banderas"><img src="https://flagcdn.com/w320/ec.png" alt="Bandera de Ecuador">❤️<img src="https://flagcdn.com/w320/ar.png" alt="Bandera de Argentina"></span></h1>
+        <div class="pregunta" id="pregunta">¿Soy el amor y el hombre de tu vida?</div>
+        <div class="botones">
+            <button class="btn-si" onclick="responder('si')" id="btn-si">¡Sí!</button>
+            <button class="btn-no" onclick="responder('no')" id="btn-no">No</button>
+        </div>
+        <div class="mensaje-final" id="mensaje-final"></div>
+        <button class="btn-confeti" onclick="lanzarConfeti()" id="btn-confeti">¡Celebremos con confeti! 🎉</button>
     </div>
 
     <script>
-        const mensajes = [
-            "¡Ups, ratoncito! Sigues siendo la argentina que hace que mi café ecuatoriano sepa a mate dulce. ¿Coincidencia? Nah, es que te extraño demasiado. 😂🇦🇷☕",
-            "Si no quieres estar con nadie, ¿qué tal si fingimos que soy tu tango secreto? Ronroneo de ratoncito incluido, pero con salsa ecuatoriana. 🐱❤️🕺",
-            "Día 1 de 'operación volver con Belén': esta página tonta desde Ecuador. Día 2: esperar que no me mandes al carajo. ¿Funcionando, mi amor? 😅",
-            "Recuerda esa vez que nos reímos hasta llorar por [inserta recuerdo tuyo aquí]? Hagámoslo de nuevo, pero con abrazos transfronterizos. Tú en Buenos Aires, yo en Quito... ¡o viceversa!",
-            "No estoy listo para rendirme, Belén... pero sí para verte sonreír con esto. ¿Lista para intentarlo, o sigo siendo el loco ecuatoriano persistente? 😉🇪🇨",
-            "¡Alerta, ratoncito pequeño! Tu ex invade tu pantalla con amor argentino-ecuatoriano. ¿Evacuar a la pampa o reírte conmigo en la selva? 🌳🇦🇷",
-            "Si el botón dice 'molestar', es porque extrañas mis tonterías, Belén. Admítelo: un clic más y ya estamos planeando el próximo asado con encebollado. 🎉🍖",
-            "Milagros Belén Ojeda, mi ratoncito: de Argentina a Ecuador, el camino es largo... pero por ti, cruzo el continente con una sonrisa. ¿Me dejas intentarlo de nuevo? 💖"
+        let clicsNo = 0;
+        const maxClicsNo = 6;
+        const preguntasNo = [
+            "¿En serio, Belén? ¿No soy el que te hace reír con memes ecuatorianos?",
+            "¡Ay, ratoncito! ¿Y si soy el amor que cruza océanos por un mate?",
+            "¿No? Milagros Belén Ojeda, ¿olvidaste los abrazos transfronterizos?",
+            "¡Vamos, mi amor argentino! ¿No soy el que baila tango con salsa?",
+            "¿Todavía no? Piensa en el asado con encebollado... ¿y en mí?",
+            "Última chance, ratoncito pequeño: ¿de verdad no soy tu amor eterno?"
         ];
 
-        function molestar() {
-            const random = Math.floor(Math.random() * mensajes.length);
-            document.getElementById('mensaje').innerHTML = `<span class="corazon">💖</span> ${mensajes[random]} <span class="corazon">💖</span>`;
-            
-            // Efecto extra: haz que el botón vibre un poquito
-            const btn = event.target;
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => { btn.style.transform = 'scale(1)'; }, 100);
+        function responder(respuesta) {
+            const preguntaEl = document.getElementById('pregunta');
+            const btnNo = document.getElementById('btn-no');
+            const mensajeFinal = document.getElementById('mensaje-final');
+            const btnConfeti = document.getElementById('btn-confeti');
+
+            if (respuesta === 'si') {
+                if (clicsNo >= maxClicsNo) {
+                    // Mensaje final bonito
+                    mensajeFinal.innerHTML = `¡Sí, Belén! Eres mi todo, mi ratoncito argentino que ilumina mi mundo ecuatoriano. No hay distancia que nos separe: volvamos a reír, a soñar y a amarnos como antes. Te amo con todo mi corazón. 💜🇪🇨❤️🇦🇷`;
+                    mensajeFinal.style.display = 'block';
+                    btnConfeti.style.display = 'inline-block';
+                    btnNo.style.display = 'none'; // Asegurar que no quede
+                } else {
+                    // Si clica Sí antes, igual celebra, pero anima a persistir
+                    preguntaEl.textContent = '¡Sabía que dirías sí! Pero si dudas, el "No" está ahí... 😏';
+                }
+            } else { // No
+                clicsNo++;
+                const escala = 1 - (clicsNo * 0.15); // Se hace más pequeño gradualmente
+                btnNo.style.transform = `scale(${Math.max(escala, 0)})`;
+                btnNo.style.opacity = Math.max(1 - (clicsNo / maxClicsNo), 0);
+
+                if (clicsNo <= maxClicsNo) {
+                    preguntaEl.textContent = preguntasNo[clicsNo - 1];
+                }
+
+                if (clicsNo >= maxClicsNo) {
+                    btnNo.style.display = 'none';
+                    preguntaEl.textContent = '¡Ya no hay escapatoria, ratoncito! Solo queda la verdad...';
+                }
+            }
+        }
+
+        function lanzarConfeti() {
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    crearParticula();
+                }, i * 10);
+            }
+        }
+
+        function crearParticula() {
+            const particula = document.createElement('div');
+            particula.classList.add('confeti');
+            particula.style.left = Math.random() * 100 + 'vw';
+            particula.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            particula.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(particula);
+
+            setTimeout(() => {
+                particula.remove();
+            }, 5000);
         }
     </script>
 </body>
