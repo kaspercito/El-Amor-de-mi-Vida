@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Soy el amor de tu vida, Belén? 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #8e44ad 0%, #ffffff 50%, #ffffff 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #8e44ad 0%, #f3e5f5 50%, #ffffff 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,26 +16,34 @@
             margin: 0;
             color: #333;
             text-align: center;
-            overflow: hidden; /* Para el confeti */
+            overflow: hidden;
         }
         .container {
             max-width: 500px;
-            padding: 30px;
+            padding: 40px;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.2);
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(142, 68, 173, 0.15);
             transition: all 0.5s ease;
         }
         h1 {
             color: #8e44ad;
             margin-bottom: 20px;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: 600;
+        }
+        .banderas img {
+            width: 30px;
+            height: auto;
+            vertical-align: middle;
+            margin: 0 5px;
         }
         .pregunta {
             font-size: 18px;
             margin-bottom: 30px;
-            line-height: 1.4;
+            line-height: 1.5;
             color: #555;
+            font-weight: 300;
         }
         .botones {
             display: flex;
@@ -45,6 +54,7 @@
         button {
             padding: 15px 30px;
             font-size: 18px;
+            font-weight: 400;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -58,49 +68,50 @@
         .btn-si:hover {
             transform: scale(1.05);
             background: #7d3c98;
+            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3);
         }
         .btn-no {
-            background: #bdc3c7;
-            color: #333;
-            font-weight: bold;
+            background: #e0e0e0;
+            color: #666;
+            font-weight: 600;
         }
         .btn-no:hover {
             transform: scale(1.05);
-            background: #95a5a6;
+            background: #d0d0d0;
         }
         .mensaje-final {
             display: none;
             margin-top: 20px;
-            font-size: 20px;
+            font-size: 18px;
             color: #8e44ad;
+            line-height: 1.6;
             animation: fadeIn 1s ease;
+            font-weight: 300;
         }
         .btn-confeti {
-            background: #e74c3c;
+            background: #9c27b0;
             color: white;
             margin-top: 20px;
             display: none;
+            padding: 12px 25px;
+            font-size: 16px;
         }
         .btn-confeti:hover {
             transform: scale(1.05);
-            background: #c0392b;
-        }
-        .banderas {
-            font-size: 20px;
-            margin: 0 5px;
+            background: #7b1fa2;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Confeti */
+        /* Confeti mejorado */
         .confeti {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #8e44ad;
+            width: 8px;
+            height: 8px;
             pointer-events: none;
             animation: confeti-fall linear infinite;
+            border-radius: 50%;
         }
         @keyframes confeti-fall {
             to {
@@ -111,7 +122,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>¡Hola, Belén, mi ratoncito pequeño!<span class="banderas"><img src="https://flagcdn.com/w320/ec.png" alt="Bandera de Ecuador">❤️<img src="https://flagcdn.com/w320/ar.png" alt="Bandera de Argentina"></span></h1>
+        <h1>¡Hola, Belén, mi ratoncito pequeño! <span class="banderas"><img src="https://flagcdn.com/w40/ec.png" alt="🇪🇨">❤️<img src="https://flagcdn.com/w40/ar.png" alt="🇦🇷"></span></h1>
         <div class="pregunta" id="pregunta">¿Soy el amor y el hombre de tu vida?</div>
         <div class="botones">
             <button class="btn-si" onclick="responder('si')" id="btn-si">¡Sí!</button>
@@ -123,14 +134,18 @@
 
     <script>
         let clicsNo = 0;
-        const maxClicsNo = 6;
+        const maxClicsNo = 10;
         const preguntasNo = [
-            "¿En serio, Belén? ¿No soy el que te hace reír con memes ecuatorianos?",
-            "¡Ay, ratoncito! ¿Y si soy el amor que cruza océanos por un mate?",
-            "¿No? Milagros Belén Ojeda, ¿olvidaste los abrazos transfronterizos?",
-            "¡Vamos, mi amor argentino! ¿No soy el que baila tango con salsa?",
-            "¿Todavía no? Piensa en el asado con encebollado... ¿y en mí?",
-            "Última chance, ratoncito pequeño: ¿de verdad no soy tu amor eterno?"
+            "En serio, Belén? ¿No soy el que te manda memes ecuatorianos a las 3 de la mañana?",
+            "¡Ay, ratoncito! ¿Y si soy el único que entiende tus dramas con el mate?",
+            "No? Milagros Belén Ojeda, ¿ya te olvidaste de esos abrazos que cruzan el ecuador?",
+            "¡Dale, mi argentina favorita! ¿No soy el que te hace bailar tango con pasos de salsa?",
+            "Todavía no? Pensá en un asado con encebollado... y en nosotros riéndonos todo el día",
+            "Última? Nah, ratoncito, ¿de verdad no soy el tipo que te hace sonreír con boludeces?",
+            "¿Sigo insistiendo? Porque extrañé tus ojos y esa forma tuya de mirarme como si fuera el único",
+            "Belén, ¿no? Ok, pero recordá las noches charlando hasta el amanecer, de Buenos Aires a Quito",
+            "¡Casi me rindo! Pero nah, sos mi debilidad... ¿soy o no soy el hombre que querés de vuelta?",
+            "Ya, ratoncito: sin más vueltas, ¿soy el amor que te roba el sueño desde Ecuador?"
         ];
 
         function responder(respuesta) {
@@ -141,50 +156,52 @@
 
             if (respuesta === 'si') {
                 if (clicsNo >= maxClicsNo) {
-                    // Mensaje final bonito
-                    mensajeFinal.innerHTML = `¡Sí, Belén! Eres mi todo, mi ratoncito argentino que ilumina mi mundo ecuatoriano. No hay distancia que nos separe: volvamos a reír, a soñar y a amarnos como antes. Te amo con todo mi corazón. 💜🇪🇨❤️🇦🇷`;
+                    // Mensaje final más natural
+                    mensajeFinal.innerHTML = `¡Sí, Belén! Sos todo para mí, mi ratoncito que me tiene loco desde el primer día. Extraño tus risas, tus mensajes locos y esa conexión que ni la distancia toca. Volvamos a intentarlo, a ser nosotros: yo trayendo el calor ecuatoriano, vos el fuego argentino. Te quiero un montón, de verdad. 💜 <span class="banderas"><img src="https://flagcdn.com/w40/ec.png" alt="🇪🇨">❤️<img src="https://flagcdn.com/w40/ar.png" alt="🇦🇷"></span>`;
                     mensajeFinal.style.display = 'block';
                     btnConfeti.style.display = 'inline-block';
-                    btnNo.style.display = 'none'; // Asegurar que no quede
+                    document.querySelector('.botones').style.display = 'none';
                 } else {
-                    // Si clica Sí antes, igual celebra, pero anima a persistir
-                    preguntaEl.textContent = '¡Sabía que dirías sí! Pero si dudas, el "No" está ahí... 😏';
+                    // Si dice sí temprano, un guiño juguetón
+                    preguntaEl.textContent = '¡Obvio que sí! Pero si el "No" te tienta, dale... yo espero. 😏';
                 }
             } else { // No
                 clicsNo++;
-                const escala = 1 - (clicsNo * 0.15); // Se hace más pequeño gradualmente
-                btnNo.style.transform = `scale(${Math.max(escala, 0)})`;
+                const escala = Math.max(1 - (clicsNo * 0.08), 0); // Más gradual, 10 clics
+                btnNo.style.transform = `scale(${escala})`;
                 btnNo.style.opacity = Math.max(1 - (clicsNo / maxClicsNo), 0);
 
-                if (clicsNo <= maxClicsNo) {
+                if (clicsNo < maxClicsNo) {
                     preguntaEl.textContent = preguntasNo[clicsNo - 1];
-                }
-
-                if (clicsNo >= maxClicsNo) {
+                } else {
                     btnNo.style.display = 'none';
-                    preguntaEl.textContent = '¡Ya no hay escapatoria, ratoncito! Solo queda la verdad...';
+                    preguntaEl.textContent = '¡Listo, ratoncito! Ya no hay salida... solo la verdad queda. 💜';
                 }
             }
         }
 
         function lanzarConfeti() {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 150; i++) { // Más confeti para la fiesta
                 setTimeout(() => {
                     crearParticula();
-                }, i * 10);
+                }, i * 8);
             }
         }
 
         function crearParticula() {
             const particula = document.createElement('div');
             particula.classList.add('confeti');
+            const colores = ['#8e44ad', '#9c27b0', '#bb8fce', '#e1bee7']; // Tonos morados
             particula.style.left = Math.random() * 100 + 'vw';
-            particula.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            particula.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
             particula.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            particula.style.top = '-10px';
             document.body.appendChild(particula);
 
             setTimeout(() => {
-                particula.remove();
+                if (particula.parentNode) {
+                    particula.remove();
+                }
             }, 5000);
         }
     </script>
